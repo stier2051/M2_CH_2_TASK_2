@@ -26,7 +26,7 @@
                     <a href="main" class="logo">TASK MANAGER</a>
                 </div>
                 <div class="col-lg-2">
-                    <a href="#" class="all-tasks">Все задания</a>
+                    <a href="main" class="all-tasks">Все задания</a>
                 </div>
             </div>
         </div>
@@ -77,33 +77,12 @@
                 out.println("<p>Да</p>");
                 out.println("</div>");
                 out.println("<div class=\"col-lg-1 text-center\">");
-                out.println("<a href=\"#\" class=\"btn btn-primary details\">Детали</a>");
+                out.println("<a href=\"edit-task?id=" + task.getId() + "\"class=\"btn btn-primary details\">Детали</a>");
                 out.println("</div>");
                 out.println("</div>");
                 out.println("</div>");
             }
         %>
-
-
-<%--        <div class="table-row">--%>
-<%--            <div class="row align-items-center">--%>
-<%--                <div class="col-lg-1 text-center">--%>
-<%--                    <p>1</p>--%>
-<%--                </div>--%>
-<%--                <div class="col-lg-6">--%>
-<%--                    <p>Сделать ДЗ по Java EE</p>--%>
-<%--                </div>--%>
-<%--                <div class="col-lg-2 text-center">--%>
-<%--                    <p>18.10.2021</p>--%>
-<%--                </div>--%>
-<%--                <div class="col-lg-2 text-center">--%>
-<%--                    <p>Да</p>--%>
-<%--                </div>--%>
-<%--                <div class="col-lg-1 text-center">--%>
-<%--                    <a href="#" class="btn btn-primary details">Детали</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
     </div>
 </div>
 </body>

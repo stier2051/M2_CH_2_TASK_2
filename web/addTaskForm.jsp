@@ -26,7 +26,7 @@
                     <a href="main" class="logo">TASK MANAGER</a>
                 </div>
                 <div class="col-lg-2">
-                    <a href="#" class="all-tasks">Все задания</a>
+                    <a href="main" class="all-tasks">Все задания</a>
                 </div>
             </div>
         </div>
@@ -42,7 +42,8 @@
                     <textarea name="taskDescription" cols="30" rows="10" placeholder="Описание"></textarea>
                     <p class="label">Крайний срок:</p>
                     <input type="date" name="deadlineDate" class="title" placeholder="Author" class="new-post">
-                    <input type="submit" value="Добавить" class="btn btn-primary submit">
+                    <button type="submit" class="btn btn-primary submit-btn">Добавить</button>
+                    <a href="main" class="btn btn-primary submit-btn">Отмена</a>
                 </form>
             </div>
         </div>

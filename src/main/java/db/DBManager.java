@@ -40,15 +40,57 @@ public class DBManager {
             PreparedStatement st = conn.prepareStatement("select * from tasks");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                String id = rs.getString("id");
+                Long id = rs.getLong("id");
                 String taskName = rs.getString("name");
                 String taskDescription = rs.getString("description");
                 String taskDeadlineDate = rs.getString("deadlineDate");
-                tasks.add(new Task(taskName, taskDescription, taskDeadlineDate));
+                tasks.add(new Task(id, taskName, taskDescription, taskDeadlineDate));
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         return tasks;
+    }
+
+    public static Task getTask(Long id) {
+        Task task = new Task();
+        try{
+            PreparedStatement st = conn.prepareStatement("select * from tasks where id = ?");
+            st.setLong(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String taskName = rs.getString("name");
+                String taskDescription = rs.getString("description");
+                String taskDeadlineDate = rs.getString("deadLineDate");
+                task = new Task(taskName, taskDescription, taskDeadlineDate);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return task;
+    }
+
+    public static void updateTask(Long id, String name, String description, String deadlineDate) {
+        try{
+            PreparedStatement st = conn.prepareStatement("update tasks set name = ?, description = ?, deadlineDate = ? where id = ?");
+            st.setString(1, name);
+            st.setString(2, description);
+            st.setString(3, deadlineDate);
+            st.setLong(4, id);
+            st.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("Task successfully updated");
+    }
+
+    public static void deleteTask(Long id) {
+        try{
+            PreparedStatement st = conn.prepareStatement("delete from tasks where id = ?");
+            st.setLong(1, id);
+            st.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
