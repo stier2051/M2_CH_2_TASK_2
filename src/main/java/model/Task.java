@@ -4,22 +4,25 @@ public class Task {
     private Long id;
     private String name;
     private String description;
+    private String status;
     private String deadlineDate;
 
     public Task() {
 
     }
 
-    public Task(String name, String description, String deadlineDate) {
+    public Task(String name, String description, String status, String deadlineDate) {
         this.name = name;
         this.description = description;
+        this.status = status;
         this.deadlineDate = deadlineDate;
     }
 
-    public Task(Long id, String name, String description, String deadlineDate) {
+    public Task(Long id, String name, String description, String status, String deadlineDate) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.status = status;
         this.deadlineDate = deadlineDate;
     }
 
@@ -41,6 +44,14 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDeadlineDate() {

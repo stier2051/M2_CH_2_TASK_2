@@ -22,11 +22,13 @@ public class EditTask extends HttpServlet {
 
         String taskName = editTask.getName();
         String taskDescription = editTask.getDescription();
+        String taskStatus = editTask.getStatus();
         String taskDeadlineDate = editTask.getDeadlineDate();
 
         request.setAttribute("id", id.toString());
         request.setAttribute("taskName", taskName);
         request.setAttribute("taskDescription", taskDescription);
+        request.setAttribute("taskStatus", taskStatus);
         request.setAttribute("taskDeadlineDate", taskDeadlineDate);
 
         request.getRequestDispatcher("/editTask.jsp").forward(request, response);
@@ -38,10 +40,11 @@ public class EditTask extends HttpServlet {
         String taskName = request.getParameter("taskTitle");
         System.out.println(taskName);
         String taskDescription = request.getParameter("taskDescription");
+        String taskStatus = request.getParameter("taskStatus");
         String taskDeadlineDate = request.getParameter("deadlineDate");
 
         DBManager.connectToDb();
-        DBManager.updateTask(id, taskName, taskDescription, taskDeadlineDate);
+        DBManager.updateTask(id, taskName, taskDescription, taskStatus, taskDeadlineDate);
         request.setAttribute("tasks", DBManager.getAllTasks());
         request.getRequestDispatcher("/allTasks.jsp").forward(request, response);
     }

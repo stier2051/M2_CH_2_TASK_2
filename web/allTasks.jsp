@@ -74,7 +74,7 @@
                 out.println("<p>" + task.getDeadlineDate() + "</p>");
                 out.println("</div>");
                 out.println("<div class=\"col-lg-2 text-center\">");
-                out.println("<p>Да</p>");
+                out.println("<p>" + task.getStatus() + "</p>");
                 out.println("</div>");
                 out.println("<div class=\"col-lg-1 text-center\">");
                 out.println("<a href=\"edit-task?id=" + task.getId() + "\"class=\"btn btn-primary details\">Детали</a>");

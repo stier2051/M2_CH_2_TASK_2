@@ -9,17 +9,17 @@ import java.io.IOException;
 public class NewTask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.getRequestDispatcher("/addTaskForm.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBManager.connectToDb();
 
         String taskName = request.getParameter("taskName");
         String taskDescription = request.getParameter("taskDescription");
         String taskDeadlineDate = request.getParameter("deadlineDate");
-
+        DBManager.connectToDb();
         DBManager.addNewTask(taskName, taskDescription, taskDeadlineDate);
         request.getRequestDispatcher("/addTaskForm.jsp").forward(request, response);
     }

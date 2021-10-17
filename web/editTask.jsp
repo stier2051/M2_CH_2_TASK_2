@@ -54,7 +54,7 @@
                         out.println("<input type=\"date\" name=\"deadlineDate\" class=\"title\" placeholder=\"Author\" class=\"new-post\" value=\"" + deadlineDate + "\">");
                     %>
                     <p class="label">Выполнено:</p>
-                    <select name="status">
+                    <select name="taskStatus">
                         <option value="no">Нет</option>
                         <option value="yes">Да</option>
                     </select>
@@ -62,8 +62,6 @@
                     <%
                         out.println("<a href=\"delete-task?id=" + id + "\"class=\"btn btn-danger edit-btn\">Удалить</a>");
                     %>
-
-<%--                    <button type="button" class="btn btn-danger edit-btn">Удалить</button>--%>
                 </form>
             </div>
         </div>
