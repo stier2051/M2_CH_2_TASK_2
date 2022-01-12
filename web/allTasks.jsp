@@ -8,81 +8,84 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <!-- Bootstrap Reboot CSS -->
-    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <title>Main</title>
-</head>
+<%@include file="head.jsp"%>
 <body>
 <div class="container">
-    <header class="header">
-        <div class="heading">
-            <div class="row justify-content-start align-items-center">
-                <div class="col-lg-3">
-                    <a href="main" class="logo">TASK MANAGER</a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="main" class="all-tasks">Все задания</a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <%@ include file="header.html"%>
     <div class="add">
         <div class="row">
             <div class="col">
-                <a href="new-task" class="btn btn-primary add-task">+ Добавить задание</a>
+                <a href="" class="btn btn-primary add-task" data-bs-toggle="modal" data-bs-target="#addNewTask">+ New Task</a>
             </div>
         </div>
     </div>
     <div class="tasks-table">
-        <div class="table-heading">
-            <div class="row">
-                <div class="col-lg-1 text-center">
-                    <h6>ID</h6>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-center">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        ArrayList<Task> tasks = (ArrayList<Task>) request.getAttribute("tasks");
+                        for (Task task : tasks) {
+                    %>
+                    <tr>
+                        <th scope="row"><%=task.getId()%></th>
+                        <td><%=task.getName()%></td>
+                        <td><%=task.getDeadlineDate()%></td>
+                        <td><%=task.getStatus()%></td>
+                        <td class="text-center">
+                            <a href="edit-task?id=<%=task.getId()%>" class="btn btn-primary details">Details</a>
+                            <a href="delete-task?id=<%=task.getId()%>" class="btn btn-danger details">Delete</a>
+                        </td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addNewTask">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="col-lg-6">
-                    <h6>Наименование</h6>
-                </div>
-                <div class="col-lg-2 text-center">
-                    <h6>Крайний срок</h6>
-                </div>
-                <div class="col-lg-2 text-center">
-                    <h6>Выполнено</h6>
-                </div>
-                <div class="col-lg-1 text-center">
-                    <h6>Детали</h6>
+                <div class="modal-body">
+                    <form action="/add-task" method="post">
+                        <div class="mb-3">
+                            <label for="taskName" class="form-label">Name</label>
+                            <input type="text" name="taskName" class="form-control" id="taskName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDescription" class="form-label">Description</label>
+                            <textarea name="taskDescription" id="taskDescription" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDeadline" class="form-label">Deadline</label>
+                            <input type="date" name="taskDeadline" class="form-control" id="taskDeadline">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Task</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <%
-            ArrayList<Task> tasks = (ArrayList<Task>) request.getAttribute("tasks");
-            for (Task task : tasks) {
-                out.println("<div class=\"table-row\">");
-                out.println("<div class=\"row align-items-center\">");
-                out.println("<div class=\"col-lg-1 text-center\">");
-                out.println("<p>" + task.getId() + "</p>");
-                out.println("</div>");
-                out.println("<div class=\"col-lg-6\">");
-                out.println("<p>" + task.getName() + "</p>");
-                out.println("</div>");
-                out.println("<div class=\"col-lg-2 text-center\">");
-                out.println("<p>" + task.getDeadlineDate() + "</p>");
-                out.println("</div>");
-                out.println("<div class=\"col-lg-2 text-center\">");
-                out.println("<p>" + task.getStatus() + "</p>");
-                out.println("</div>");
-                out.println("<div class=\"col-lg-1 text-center\">");
-                out.println("<a href=\"edit-task?id=" + task.getId() + "\"class=\"btn btn-primary details\">Детали</a>");
-                out.println("</div>");
-                out.println("</div>");
-                out.println("</div>");
-            }
-        %>
     </div>
 </div>
 </body>

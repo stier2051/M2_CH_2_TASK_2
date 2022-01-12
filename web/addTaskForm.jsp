@@ -19,18 +19,7 @@
 </head>
 <body>
 <div class="container">
-    <header class="header">
-        <div class="heading">
-            <div class="row justify-content-start align-items-center">
-                <div class="col-lg-3">
-                    <a href="main" class="logo">TASK MANAGER</a>
-                </div>
-                <div class="col-lg-2">
-                    <a href="main" class="all-tasks">Все задания</a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <%@ include file="header.html"%>
     <div class="tasks">
         <div class="row">
             <div class="col">

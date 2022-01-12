@@ -1,3 +1,5 @@
+package servlets;
+
 import db.DBManager;
 
 import javax.servlet.*;
@@ -9,11 +11,9 @@ import java.io.IOException;
 public class DeleteTask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       Long id = Long.parseLong(request.getParameter("id"));
-        DBManager.connectToDb();
+        Long id = Long.parseLong(request.getParameter("id"));
         DBManager.deleteTask(id);
-        System.out.println("Task deleted");
-        request.getRequestDispatcher("/main").forward(request, response);
+        response.sendRedirect("/main");
     }
 
     @Override

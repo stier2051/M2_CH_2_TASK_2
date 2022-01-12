@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 public class Task {
     private Long id;
     private String name;
@@ -8,14 +10,6 @@ public class Task {
     private String deadlineDate;
 
     public Task() {
-
-    }
-
-    public Task(String name, String description, String status, String deadlineDate) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.deadlineDate = deadlineDate;
     }
 
     public Task(Long id, String name, String description, String status, String deadlineDate) {
@@ -68,6 +62,7 @@ public class Task {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
                 ", deadlineDate='" + deadlineDate + '\'' +
                 '}';
     }

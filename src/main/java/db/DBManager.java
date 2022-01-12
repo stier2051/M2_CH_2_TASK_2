@@ -21,24 +21,23 @@ public class DBManager {
         }
     }
 
-    public static void addNewTask(String name, String description, String deadlineDate) {
+    public static void addNewTask(Task task) {
         try{
-            PreparedStatement st = conn.prepareStatement("insert into tasks(name, description, status, deadlineDate) value(?,?,?,?)");
-            st.setString(1, name);
-            st.setString(2, description);
-            st.setString(3, "Нет");
-            st.setString(4, deadlineDate);
+            PreparedStatement st = conn.prepareStatement("insert into tasks values (null, ?, ?, ?, ?)");
+            st.setString(1, task.getName());
+            st.setString(2, task.getDescription());
+            st.setString(3, task.getStatus());
+            st.setString(4, task.getDeadlineDate());
             st.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println("Task successfully added");
     }
 
     public static ArrayList<Task> getAllTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         try{
-            PreparedStatement st = conn.prepareStatement("select * from tasks");
+            PreparedStatement st = conn.prepareStatement("select * from tasks order by id desc");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Long id = rs.getLong("id");
@@ -65,7 +64,7 @@ public class DBManager {
                 String taskDescription = rs.getString("description");
                 String taskStatus = rs.getString("status");
                 String taskDeadlineDate = rs.getString("deadLineDate");
-                task = new Task(taskName, taskDescription, taskStatus, taskDeadlineDate);
+                task = new Task(id, taskName, taskDescription, taskStatus, taskDeadlineDate);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -73,19 +72,18 @@ public class DBManager {
         return task;
     }
 
-    public static void updateTask(Long id, String name, String description, String status, String deadlineDate) {
+    public static void updateTask(Task task) {
         try{
             PreparedStatement st = conn.prepareStatement("update tasks set name = ?, description = ?, status = ?, deadlineDate = ? where id = ?");
-            st.setString(1, name);
-            st.setString(2, description);
-            st.setString(3, status);
-            st.setString(4, deadlineDate);
-            st.setLong(5, id);
+            st.setString(1, task.getName());
+            st.setString(2, task.getDescription());
+            st.setString(3, task.getStatus());
+            st.setString(4, task.getDeadlineDate());
+            st.setLong(5, task.getId());
             st.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println("Task successfully updated");
     }
 
     public static void deleteTask(Long id) {

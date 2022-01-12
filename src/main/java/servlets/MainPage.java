@@ -1,3 +1,5 @@
+package servlets;
+
 import db.DBManager;
 
 import javax.servlet.*;
